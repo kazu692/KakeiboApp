@@ -43,7 +43,7 @@ struct SetTargetSavingsView: View {
                 Spacer() // フォームを上部に寄せる
                 
                 // 設定ボタン
-                AppButton(title: "目標を設定", action: {
+                PrimaryButton(title: "目標を設定", action: {
                     if let amount = Double(targetAmountText), amount >= 0 {
                         viewModel.targetSavings = amount // ViewModelの目標貯金額を更新
                         dismiss() // 画面を閉じる

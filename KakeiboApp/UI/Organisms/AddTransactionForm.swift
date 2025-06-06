@@ -1,5 +1,5 @@
 //
-//  AddExpensesForm.swift
+//  AddTransactionForm.swift
 //  KakeiboApp
 //
 //  Created by 山口和也 on 2025/06/04.
@@ -7,33 +7,37 @@
 
 import SwiftUI
 
-struct AddExpenseForm: View {
-    @Binding var amountText: String
-    @Binding var itemText: String
-    let addAction: () -> Void // 追加ボタンが押された時のアクション
+struct AddTransactionForm: View {
+    var title: String
+    @Binding var item: String
+    @Binding var amount: String
+    var onSubmit: () -> Void
 
     var body: some View {
         VStack(spacing: 16) {
-            AppTextField(placeholder: "金額", text: $amountText)
-                .keyboardType(.decimalPad) // 数値入力キーボード
-            AppTextField(placeholder: "項目", text: $itemText)
+            AppTextField(placeholder: "項目を入力", text: $item)
+            AppTextField(placeholder: "金額を入力", text: $amount)
+                .keyboardType(.decimalPad)
 
-            PrimaryButton(title: "追加", action: addAction)
+            PrimaryButton(title: title) {
+                onSubmit()
+            }
+            .padding(.top)
         }
         .padding()
-        .background(Color.white)
-        .cornerRadius(10)
-        .shadow(radius: 5)
+        .background(Color(.systemGray6))
+        .cornerRadius(12)
+        .shadow(radius: 4)
     }
 }
 
-struct AddExpenseForm_Previews: PreviewProvider {
-    @State static var previewAmount = ""
-    @State static var previewItem = ""
+struct AddETransactionForm_Previews: PreviewProvider {
     static var previews: some View {
-        AddExpenseForm(amountText: $previewAmount, itemText: $previewItem) {
-            print("プレビューで追加ボタンが押されました")
-        }
-        .padding()
+        AddTransactionForm(
+            title: "支出を追加",
+            item: .constant("コーヒー"),
+            amount: .constant("300"),
+            onSubmit: {}
+        )
     }
 }

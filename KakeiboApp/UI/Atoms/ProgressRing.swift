@@ -1,5 +1,5 @@
 //
-//  SavingsProgressRingView.swift
+//  ProgressRing.swift
 //  KakeiboApp
 //
 //  Created by 山口和也 on 2025/05/30.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct SavingsProgressRingView: View {
+struct ProgressRing: View {
     let progress: Double // 0.0 から 1.0 までの達成度合い
     let thickness: CGFloat // リングの太さ
     let accentColor: Color // 達成部分の色
@@ -33,23 +33,23 @@ struct SavingsProgressRingView: View {
     }
 }
 
-struct SavingsProgressRingView_Previews: PreviewProvider {
+struct ProgressRing_Previews: PreviewProvider {
     static var previews: some View {
         VStack(spacing: 50) {
             Text("達成度 25%")
-            SavingsProgressRingView(progress: 0.25, thickness: 20, accentColor: .blue, backgroundColor: .gray.opacity(0.3))
+            ProgressRing(progress: 0.25, thickness: 20, accentColor: .blue, backgroundColor: .gray.opacity(0.3))
                 .frame(width: 150, height: 150)
 
             Text("達成度 75%")
-            SavingsProgressRingView(progress: 0.75, thickness: 20, accentColor: .orange, backgroundColor: .gray.opacity(0.3))
+            ProgressRing(progress: 0.75, thickness: 20, accentColor: .orange, backgroundColor: .gray.opacity(0.3))
                 .frame(width: 150, height: 150)
 
             Text("達成度 100%以上")
-            SavingsProgressRingView(progress: 1.0, thickness: 20, accentColor: .green, backgroundColor: .gray.opacity(0.3))
+            ProgressRing(progress: 1.0, thickness: 20, accentColor: .green, backgroundColor: .gray.opacity(0.3))
                 .frame(width: 150, height: 150)
 
             Text("達成度 0%")
-            SavingsProgressRingView(progress: 0.0, thickness: 20, accentColor: .red, backgroundColor: .gray.opacity(0.3))
+            ProgressRing(progress: 0.0, thickness: 20, accentColor: .red, backgroundColor: .gray.opacity(0.3))
                 .frame(width: 150, height: 150)
         }
     }

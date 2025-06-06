@@ -1,5 +1,5 @@
 //
-//  ExpenseRow.swift
+//  TransactionRow.swift
 //  KakeiboApp
 //
 //  Created by 山口和也 on 2025/06/04.
@@ -7,34 +7,37 @@
 
 import SwiftUI
 
-struct ExpenseRow: View {
-    let expense: Expense // 表示する支出データ
-
-    // 日付フォーマット
-    private var dateFormatter: DateFormatter {
-        let formatter = DateFormatter()
-        formatter.dateStyle = .short // 短い形式（例: 2023/04/01）
-        formatter.timeStyle = .short // 短い形式（例: 10:30）
-        return formatter
-    }
+struct TransactionRow: View {
+    let transaction: TransactionItem
 
     var body: some View {
-        HStack { // 横方向に要素を配置
-            VStack(alignment: .leading) { // 縦方向に要素を配置し、左寄せ
-                AppText(text: expense.item, font: .headline) // 項目名
-                AppText(text: dateFormatter.string(from: expense.date), font: .caption, color: .gray) // 日付
+        HStack {
+            VStack(alignment: .leading) {
+                AppText(text: transaction.item, font: .headline)
+                AppText(text: formattedDate, font: .caption, color: .gray)
             }
-            Spacer() // 左寄せと右寄せの間隔を自動調整
-            AppText(text: "¥" + String(format: "%.0f", expense.amount), font: .subheadline) // 金額（小数点以下なし）
+            Spacer()
+            AppText(
+                text: "\(transaction.type == .income ? "+" : "-")\(String(format: "%.0f", transaction.amount)) 円",
+                font: .subheadline,
+                color: transaction.type == .income ? .green : .red
+            )
         }
-        .padding(.vertical, 4) // 上下のパディング
+        .padding(.vertical, 4)
+    }
+
+    private var formattedDate: String {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .short
+        formatter.timeStyle = .short
+        return formatter.string(from: transaction.date)
     }
 }
 
-struct ExpenseRow_Previews: PreviewProvider {
+struct TransactionRow_Previews: PreviewProvider {
     static var previews: some View {
-        ExpenseRow(expense: Expense(date: Date(), amount: 1500, item: "カフェ代"))
-            .padding()
-            .previewLayout(.sizeThatFits) // プレビューのサイズを内容に合わせる
+        TransactionRow(transaction: TransactionItem.income(
+            Income(date: Date(), amount: 5000, item: "アルバイト")
+        ))
     }
 }

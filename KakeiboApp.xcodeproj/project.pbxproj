@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		6C948B6F2DF0049100CD6306 /* KakeiboAppModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6C948B6D2DF0049100CD6306 /* KakeiboAppModel.xcdatamodeld */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		6C948B4A2DF0015700CD6306 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -27,6 +31,7 @@
 		6C948B3C2DF0015700CD6306 /* KakeiboApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KakeiboApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C948B492DF0015700CD6306 /* KakeiboAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KakeiboAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C948B532DF0015700CD6306 /* KakeiboAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KakeiboAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		6C948B6E2DF0049100CD6306 /* KakeiboAppModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = KakeiboAppModel.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -75,6 +80,7 @@
 		6C948B332DF0015700CD6306 = {
 			isa = PBXGroup;
 			children = (
+				6C948B6D2DF0049100CD6306 /* KakeiboAppModel.xcdatamodeld */,
 				6C948B3E2DF0015700CD6306 /* KakeiboApp */,
 				6C948B4C2DF0015700CD6306 /* KakeiboAppTests */,
 				6C948B562DF0015700CD6306 /* KakeiboAppUITests */,
@@ -236,6 +242,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6C948B6F2DF0049100CD6306 /* KakeiboAppModel.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -550,6 +557,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		6C948B6D2DF0049100CD6306 /* KakeiboAppModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				6C948B6E2DF0049100CD6306 /* KakeiboAppModel.xcdatamodel */,
+			);
+			currentVersion = 6C948B6E2DF0049100CD6306 /* KakeiboAppModel.xcdatamodel */;
+			path = KakeiboAppModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 6C948B342DF0015700CD6306 /* Project object */;
 }

@@ -1,5 +1,5 @@
 //
-//  AppButton.swift
+//  PrimaryButton.swift
 //  KakeiboApp
 //
 //  Created by 山口和也 on 2025/06/04.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct AppButton: View {
+struct PrimaryButton: View {
     let title: String
     let action: () -> Void // ボタンが押された時に実行されるクロージャ
 
@@ -22,9 +22,9 @@ struct AppButton: View {
     }
 }
 
-struct AppButton_Previews: PreviewProvider {
+struct PrimaryButton_Previews: PreviewProvider {
     static var previews: some View {
-        AppButton(title: "タップしてください") {
+        PrimaryButton(title: "タップしてください") {
             print("ボタンがタップされました！")
         }
         .padding()

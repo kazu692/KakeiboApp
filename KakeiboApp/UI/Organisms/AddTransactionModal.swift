@@ -1,5 +1,5 @@
 //
-//  AddExpenseView.swift
+//  AddTransactionModal.swift
 //  KakeiboApp
 //
 //  Created by 山口和也 on 2025/06/04.
@@ -7,49 +7,52 @@
 
 import SwiftUI
 
-struct AddExpenseView: View {
-    @Environment(\.dismiss) var dismiss // モーダルを閉じるための環境変数
-    @ObservedObject var viewModel: AccountBookViewModel // 親からViewModelを受け取る
-    @State private var amountText: String = ""
-    @State private var itemText: String = ""
-    @State private var showingAlert = false
-    @State private var alertMessage = ""
+struct AddTransactionModal: View {
+    @ObservedObject var viewModel: AccountBookViewModel
+    var transactionType: TransactionType
+
+    @State private var item: String = ""
+    @State private var amount: String = ""
+    @Environment(\.dismiss) private var dismiss
+    @State private var showAlert = false
 
     var body: some View {
         NavigationView {
-            VStack {
-                AddExpenseForm(amountText: $amountText, itemText: $itemText) {
-                    // 追加ボタンが押された時のアクション
-                    if let amount = Double(amountText), !itemText.isEmpty {
-                        viewModel.addExpense(amount: amount, item: itemText)
-                        dismiss() // 画面を閉じる
-                    } else {
-                        alertMessage = "金額と項目を入力してください。"
-                        showingAlert = true
-                    }
-                }
-                Spacer()
-            }
-            .navigationTitle("支出を追加")
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar { // ナビゲーションバーのボタン
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button("キャンセル") {
-                        dismiss() // 画面を閉じる
-                    }
-                }
-            }
-            .alert("入力エラー", isPresented: $showingAlert) {
-                Button("OK") { }
+            AddTransactionForm(
+                title: titleText,
+                item: $item,
+                amount: $amount,
+                onSubmit: handleSubmit
+            )
+            .navigationTitle(titleText)
+            .alert("入力エラー", isPresented: $showAlert) {
+                Button("OK", role: .cancel) { }
             } message: {
-                Text(alertMessage)
+                Text("すべての項目を正しく入力してください")
             }
         }
     }
+
+    private var titleText: String {
+        transactionType == .expense ? "支出を追加" : "収入を追加"
+    }
+    private func handleSubmit() {
+        guard let amountValue = Double(amount), !item.isEmpty else {
+            showAlert = true
+            return
+        }
+
+        if transactionType == .expense {
+            viewModel.addExpense(amount: amountValue, item: item)
+        } else {
+            viewModel.addIncome(amount: amountValue, item: item)
+        }
+        dismiss()
+    }
 }
 
-struct AddExpenseView_Previews: PreviewProvider {
+struct AddTransactionModal_Previews: PreviewProvider {
     static var previews: some View {
-        AddExpenseView(viewModel: AccountBookViewModel())
+        AddTransactionModal(viewModel: AccountBookViewModel(), transactionType: .expense)
     }
 }
